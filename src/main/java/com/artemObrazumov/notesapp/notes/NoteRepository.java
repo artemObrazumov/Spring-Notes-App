@@ -1,13 +1,15 @@
 package com.artemObrazumov.notesapp.notes;
 
-import java.util.List;
-import java.util.Optional;
+import jakarta.transaction.Transactional;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.ListCrudRepository;
+import org.springframework.data.repository.query.Param;
 
-public interface NoteRepository {
+@Transactional
+public interface NoteRepository extends ListCrudRepository<Note, Integer> {
 
-    List<Note> findAll();
-    Optional<Note> findById(Integer id);
-    Integer create(Note note);
-    void update(Note note, Integer id);
-    void delete(Integer id);
+    @Modifying
+    @Query("UPDATE Note n SET n.title = :title WHERE n.id = :id")
+    int updateTitle(@Param("title") String title, @Param("id") Long id);
 }
