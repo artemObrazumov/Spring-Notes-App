@@ -1,4 +1,4 @@
-package com.artemObrazumov.notesapp.notes;
+package com.artemObrazumov.notesapp.notes.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
